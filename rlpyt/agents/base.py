@@ -29,7 +29,7 @@ class BaseAgent:
     need to extend certain funcionality to include those models, depending on
     how they are used.
     """
-    
+
     recurrent = False
     alternating = False
 
@@ -64,7 +64,7 @@ class BaseAgent:
     def initialize(self, env_spaces, share_memory=False, **kwargs):
         """
         Instantiates the neural net model(s) according to the environment
-        interfaces.  
+        interfaces.
 
         Uses shared memory as needed--e.g. in CpuSampler, workers have a copy
         of the agent for action-selection.  The workers automatically hold
@@ -130,7 +130,7 @@ class BaseAgent:
             logger.log("Initialized DistributedDataParallelCPU agent model.")
         else:
             self.model = DDP(self.model,
-                device_ids=[self.device.index], output_device=self.device.index)
+                device_ids=[self.device.index], output_device=self.device.index, find_unused_parameters=True)
             logger.log("Initialized DistributedDataParallel agent model on "
                 f"device {self.device}.")
 
