@@ -15,8 +15,8 @@ class GymSpaceWrapper:
 
     def __init__(self, space, null_value=0, name="obs", force_float32=True,
                  schemas=None):
-        """Input ``space`` is a gym space instance.  
-        
+        """Input ``space`` is a gym space instance.
+
         Input ``name`` governs naming of internal NamedTupleSchemas used to
         store Gym info.
         """
@@ -122,7 +122,7 @@ class GymSpaceWrapper:
 
 def dict_to_nt(value, name, schemas):
     if isinstance(value, dict):
-        values = {k: dict_to_nt(v, "_".join([name, k]))
+        values = {k: dict_to_nt(v, "_".join([name, k]), schemas)
             for k, v in value.items()}
         return schemas[name](**values)
     if isinstance(value, np.ndarray) and value.dtype == np.float64:
